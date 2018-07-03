@@ -34,7 +34,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Laravel Routing
 - Laravel create controller
 - Laravel .env file (root path)
-- Laravel Database
+- Laravel Database (MySQL MariaDB)
   ```
   DB_CONNECTION=mysql
   DB_HOST=localhost
