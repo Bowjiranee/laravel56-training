@@ -30,7 +30,10 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 ## Agenda
 - [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
-- Create laravel56-training project
+- Create laravel training project
+  ```
+  composer create-project --prefer-dist laravel/laravel training
+  ```
 - Laravel Routing
 - Laravel (Controller)
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
