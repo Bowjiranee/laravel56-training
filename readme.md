@@ -29,8 +29,14 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 
 ## Agenda
 - [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4
+  - phpmyadmin default user root password ไม่มี
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
-- Create laravel training project
+- ดึง laravel training project จาก github นี้
+  - clone git ให้เรียบร้อย
+  - แก้ไขไฟล์ .env ในส่วน database connection 
+  - composer dump-autoload
+  - php artisan migrate:refresh --seed
+- เริ่มสร้าง laravel training project ใหม่ด้วยตนเอง
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
