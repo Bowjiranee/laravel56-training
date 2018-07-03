@@ -43,6 +43,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Laravel Routing
 - Laravel (Controller)
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
+  - php artisan env
+  - php artisan key:generate
 - Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
   ```
   DB_CONNECTION=mysql
