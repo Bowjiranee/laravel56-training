@@ -51,6 +51,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan migrate (รันไฟล์ database migration for first time)
    - php artisan migrate:refresh (ลบ all table และ re-run database migration)
 - Laravel Database Seeding ใช้สร้าง row เริ่มต้นใน table ต่างๆ เวลาจะ migration 
+   - php artisan make:seeder UsersTableSeeder (สร้างไฟล์ seeder)
 - Laravel Eloquent (Model)
 - Laravel (View)
 - Laravel (Helper/Utility) Functions
