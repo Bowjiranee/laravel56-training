@@ -33,7 +33,12 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Create laravel56-training project
 - Laravel Routing
 - Laravel create controller
-- Laravel .env file
+- Laravel .env file (root path)
+- Laravel Database
+- Laravel migration (/database/migrations)
+   - php artisan make:migration {migration_file_name} --create={table_name} (สร้างไฟล์ database migration) 
+   - php artisan migrate (รันไฟล์ database migration for first time)
+   - php artisan migrate:refresh (ลบ all table และ re-run database migration)
 
 ## License
 
