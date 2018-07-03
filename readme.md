@@ -27,33 +27,67 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 
 If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Agenda
+- [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4
+- [ติดตั้ง Composer](https://getcomposer.org/download/) 
+- Create laravel training project
+  ```
+  composer create-project --prefer-dist laravel/laravel training
+  ```
+- Laravel Routing
+- Laravel (Controller)
+- Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
+- Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
+  ```
+  DB_CONNECTION=mysql
+  DB_HOST=localhost
+  DB_PORT=3307
+  DB_DATABASE=laravel56_training
+  DB_USERNAME=root
+  DB_PASSWORD=
+  ```
+- Laravel migration (/database/migrations) ใช้ database connection ในการสร้าง,แก้ไข,ลบ,ย้อนกลับ database version control โดยไม่ต้องเข้า tool
+   - php artisan make:migration {migration_file_name} --create={table_name} (สร้างไฟล์ database migration) 
+   - php artisan migrate (รันไฟล์ database migration for first time)
+   - php artisan migrate:refresh (ลบ all table และ re-run database migration)
+- Laravel Database Seeding ใช้สร้าง row เริ่มต้นใน table ต่างๆ เวลาจะ migration 
+   - php artisan make:seeder UsersTableSeeder (สร้างไฟล์ seeder)
+   - แก้ไขไฟล์ DatabaseSeeder ให้สั่งเรียก Seeder ทุกตัว ซึ่งตัวอย่างมีตัวเดียวคือ UsersTableSeeder
+     ```
+     class DatabaseSeeder extends Seeder
+     {
+      /**
+       * Seed the application's database.
+       *
+       * @return void
+       */
+      public function run()
+      {
+           $this->call(UsersTableSeeder::class);
+      }
+     }
+     ```
+   - php artisan migrate:refresh --seed (ลบ all table และ re-run database migration แถมด้วยการสร้าง row เริ่มต้น)
+   - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
+- Laravel Eloquent (Model)
+   - php artisan make:model Users (สร้างไฟล์ Users Model) (hasOne , hasMany)
+   ```
+   class SalaryClass extends Model
+   {
+    protected $table = 'salary_class';
+    
+    public function user()
+    {
+        //return $this->hasOne('App\User');
+        return $this->hasMany('App\User');
+    }
+   }
+   ```
+   
+- Laravel (View)
+- Laravel (Helper/Utility) Functions
+- Laravel Unit Test
+- Laravel Access Control Lists (ACL)
 
 ## License
 
