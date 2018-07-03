@@ -33,7 +33,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
 - ดึง laravel training project จาก github นี้
   - clone git ให้เรียบร้อย
-  - แก้ไขไฟล์ .env ในส่วน database connection 
+  - แก้ไขไฟล์ .env-example.txt เป็น .env และให้แก้ไขในส่วน database connection ใช้ให้ตรงกับเครื่องเรา 
   - composer dump-autoload
   - php artisan migrate:refresh --seed
 - เริ่มสร้าง laravel training project ใหม่ด้วยตนเอง
