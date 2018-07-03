@@ -50,6 +50,9 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Laravel Seed
 - Laravel Eloquent (Model)
 - Laravel (View)
+- Laravel (Helper/Utility) Functions
+- Laravel Unit Test
+- Laravel Access Control Lists (ACL)
 
 ## License
 
