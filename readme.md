@@ -33,8 +33,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Create laravel56-training project
 - Laravel Routing
 - Laravel create controller
-- Laravel .env file (root path)
-- Laravel Database (MySQL MariaDB)
+- Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
+- Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
   ```
   DB_CONNECTION=mysql
   DB_HOST=localhost
@@ -43,7 +43,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   DB_USERNAME=root
   DB_PASSWORD=
   ```
-- Laravel migration (/database/migrations)
+- Laravel migration (/database/migrations) ใช้ database connection ในการสร้าง,แก้ไข,ลบ,ย้อนกลับ database version control โดยไม่ต้องเข้า tool
    - php artisan make:migration {migration_file_name} --create={table_name} (สร้างไฟล์ database migration) 
    - php artisan migrate (รันไฟล์ database migration for first time)
    - php artisan migrate:refresh (ลบ all table และ re-run database migration)
