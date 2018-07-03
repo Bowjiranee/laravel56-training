@@ -8,7 +8,7 @@ class DemoController extends Controller
 {
     public function index()
     {
-        return "Method GET: Index";
+        return "Method GET: Index ".env("APP_NAME");
     }
 
     public function demotwo()

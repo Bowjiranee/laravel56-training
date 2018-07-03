@@ -19,5 +19,6 @@ Route::get('/', function () {
 //The Route::controller method is deprecated since Laravel 5.3.
 
 Route::get('/route-basic', 'DemoController@index');
+Route::get('/model', 'ModelTestController@index');
 Route::resource('/route-resource','RouteResourceController');
 
