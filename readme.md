@@ -35,6 +35,14 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Laravel create controller
 - Laravel .env file (root path)
 - Laravel Database
+  ```
+  DB_CONNECTION=mysql
+  DB_HOST=localhost
+  DB_PORT=3307
+  DB_DATABASE=laravel56_training
+  DB_USERNAME=root
+  DB_PASSWORD=
+  ```
 - Laravel migration (/database/migrations)
    - php artisan make:migration {migration_file_name} --create={table_name} (สร้างไฟล์ database migration) 
    - php artisan migrate (รันไฟล์ database migration for first time)
