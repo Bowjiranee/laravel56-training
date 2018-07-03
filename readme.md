@@ -70,6 +70,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan migrate:refresh --seed (ลบ all table และ re-run database migration แถมด้วยการสร้าง row เริ่มต้น)
    - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
 - Laravel Eloquent (Model)
+   - php artisan make:model Users (สร้างไฟล์ Users Model)
 - Laravel (View)
 - Laravel (Helper/Utility) Functions
 - Laravel Unit Test
