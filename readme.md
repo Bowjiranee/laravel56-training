@@ -28,7 +28,7 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
 ## Agenda
-- [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4
+- [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4+
   - phpmyadmin default user root password ไม่มี
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
 - ดึง laravel training project จาก github นี้
