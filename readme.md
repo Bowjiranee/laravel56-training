@@ -32,7 +32,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
 - Create laravel56-training project
 - Laravel Routing
-- Laravel create controller
+- Laravel (Controller)
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
 - Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
   ```
@@ -47,6 +47,9 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan make:migration {migration_file_name} --create={table_name} (สร้างไฟล์ database migration) 
    - php artisan migrate (รันไฟล์ database migration for first time)
    - php artisan migrate:refresh (ลบ all table และ re-run database migration)
+- Laravel Seed
+- Laravel Eloquent (Model)
+- Laravel (View)
 
 ## License
 
