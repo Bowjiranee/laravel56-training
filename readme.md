@@ -94,7 +94,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
 - Laravel Eloquent (Model)
    - php artisan make:model Users (สร้างไฟล์ Users Model) (hasOne , hasMany)
-   - ตัวอย่าง User 1 คน มี SalaryClass(ระดับเงินเดือน) 1 Class (one to one)
+   - ตัวอย่าง ถ้าเรากำหนดว่า User 1 คน มี Phone(เบอร์โทรศัพท์) 1 เบอร์ (one to one)
    
    ```
    class Users extends Model
@@ -106,15 +106,15 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
        */
       protected $table = 'users';
 
-       public function salaryclass()
+       public function phone()
       {
-          return $this->hasOne('App\SalaryClass');
+          return $this->hasOne('App\Phone');
       }
   }
    ```
    หากเป็น one to many
    ```
-   return $this->hasMany('App\SalaryClass');
+   return $this->hasMany('App\Phone');
    ```
    
 - Laravel (View) (/resources/views/) .blade file
