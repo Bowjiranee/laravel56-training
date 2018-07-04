@@ -125,6 +125,9 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   $data = array();
   return view('testing.index', $data);
   ``` 
+- [Laravel (View) Blade Template](https://laravel.com/docs/5.6/blade) การทำเป็นเท็มเพลต Header,Content,Footer
+  - @yield ใช้กำหนดส่วนที่จะมา replace จาก child view
+  - @section ใช้กำหนดส่วนที่ใช้ replace ใน @yield
 - Laravel (Helper/Utility) Functions
 - Laravel Authentication
 - Laravel Unit Test
