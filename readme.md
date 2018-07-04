@@ -189,6 +189,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    $bool = validateEmail('test@gmail.com');
    ```
 },
+- [Laravel Session](https://laravel.com/docs/5.6/session)
 - Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
