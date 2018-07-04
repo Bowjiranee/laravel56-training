@@ -43,7 +43,20 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - Laravel Routing
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
 - Laravel (Controller)
-  - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) 
+  - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
+  ```
+  <?php
+
+  namespace App\Http\Controllers\Admin;
+
+  use Illuminate\Http\Request;
+  use App\Http\Controllers\Controller;
+
+  class PhotoController extends Controller
+  {
+      //
+  }
+  ```
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
   - php artisan env
   - php artisan key:generate
