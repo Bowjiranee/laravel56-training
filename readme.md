@@ -134,6 +134,12 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    return $this->hasMany('App\Phone');
    ```
    
+   วิธีหาเบอร์โทรศัพท์ ของ users_id =1
+   ```
+   //find phone where users_id = 1
+   $phone = Users::find(1)->phone;
+   ```
+   
 - Laravel (View) (/resources/views/) .blade file
   เราจะใช้ [Laravel Helpers](https://laravel.com/docs/5.6/helpers) มาช่วยในการอ้างถึง path
   - asset() load resource(js,css,images,etc) in views
