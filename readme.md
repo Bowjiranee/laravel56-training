@@ -277,7 +277,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
                     : redirect()->guest(route('loginform'));
     }
   ```
-  หากเรียกจาก client ที่มีการ set header json ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform
+  หากเรียกจาก client ที่มีการ set header json (API) ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform เพื่อให้ Login ใหม่เป็นต้น
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
 
