@@ -42,6 +42,21 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
 - [Laravel Routing](https://laravel.com/docs/5.6/routing)
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
+  
+  ```
+  //The Route::controller method is deprecated since Laravel 5.3.
+
+  Route::get('/route-basic', 'DemoController@index');
+
+  //https://laravel.com/docs/5.6/routing#named-routes for route('model') in view
+  Route::get('/model', 'ModelTestController@index')->name('model');
+
+  Route::resource('/route-resource','RouteResourceController');
+  
+  //subfolder Test controller
+  Route::get('/view', 'Test\ViewController@index');
+  Route::get('/template', 'Test\ViewController@template');
+  ```
 - Laravel (Controller) (app/Http/Controllers)
   - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
   ```
