@@ -25,4 +25,5 @@ Route::get('/model', 'ModelTestController@index')->name('model');
 
 Route::resource('/route-resource','RouteResourceController');
 Route::get('/view', 'Test\ViewController@index');
+Route::get('/template', 'Test\ViewController@template');
 

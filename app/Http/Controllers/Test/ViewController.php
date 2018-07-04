@@ -13,4 +13,10 @@ class ViewController extends Controller
         $data = array();
         return view('testing.index', $data);
     }
+    
+    public function template()
+    {
+        $data = array();
+        return view('testing.child', $data);
+    }
 }
