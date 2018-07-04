@@ -94,17 +94,23 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
 - Laravel Eloquent (Model)
    - php artisan make:model Users (สร้างไฟล์ Users Model) (hasOne , hasMany)
+   - ตัวอย่าง User 1 คน มี SalaryClass(ระดับเงินเดือน) 1 Class 
+   
    ```
-   class SalaryClass extends Model
-   {
-    protected $table = 'salary_class';
-    
-    public function user()
-    {
-        //return $this->hasOne('App\User');
-        return $this->hasMany('App\User');
-    }
-   }
+   class Users extends Model
+  {
+      /**
+       * The table associated with the model.
+       *
+       * @var string
+       */
+      protected $table = 'users';
+
+       public function salaryclass()
+      {
+          return $this->hasOne('App\SalaryClass');
+      }
+  }
    ```
    
 - Laravel (View) (/resources/views/) .blade file
