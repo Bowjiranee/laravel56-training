@@ -40,9 +40,26 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
-- Laravel Routing
+- [Laravel Routing](https://laravel.com/docs/5.6/routing)
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
-- Laravel (Controller)
+  
+  ```
+  //The Route::controller method is deprecated since Laravel 5.3.
+
+  Route::get('/route-basic', 'DemoController@index');
+  Route::post('/route-basic', 'DemoController@testpost');
+
+  //https://laravel.com/docs/5.6/routing#named-routes for route('model') in view
+  Route::get('/model', 'ModelTestController@index')->name('model');
+
+  Route::resource('/route-resource','RouteResourceController');
+  
+  
+  //subfolder Test controller
+  Route::get('/view', 'Test\ViewController@index');
+  Route::get('/template', 'Test\ViewController@template');
+  ```
+- Laravel (Controller) (app/Http/Controllers)
   - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
   ```
   <?php
@@ -115,6 +132,12 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    หากเป็น one to many
    ```
    return $this->hasMany('App\Phone');
+   ```
+   
+   วิธีหาเบอร์โทรศัพท์ ของ users_id =1
+   ```
+   //find phone where users_id = 1
+   $phone = Users::find(1)->phone;
    ```
    
 - Laravel (View) (/resources/views/) .blade file
