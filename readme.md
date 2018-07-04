@@ -134,7 +134,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    return $this->hasMany('App\Phone');
    ```
    
-   กลับกันใน Class Phone ต้องทำ Relation กลับมาโดยจะใช้ belongsTo
+   กลับกันใน Class Phone ต้องทำ Relation กลับมาโดยจะใช้ belongsTo และ ->withDefault() ใช้สำหรับให้ return empty App\User หาก relation ไม่พบ
    ```
    <?php
 
@@ -151,7 +151,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
          */
         public function user()
         {
-            return $this->belongsTo('App\Users');
+            return $this->belongsTo('App\Users')->withDefault();
         }
 
     }
