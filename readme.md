@@ -189,7 +189,93 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    $bool = validateEmail('test@gmail.com');
    ```
 },
-- Laravel Authentication
+- [Laravel Session](https://laravel.com/docs/5.6/session)
+- Laravel Authentication 
+  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ /config/auth.php
+  ```
+  'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+  ```
+  ตัวอย่างการสร้าง Controller ที่ใช้ Auth::attempt
+  ```
+  <?php
+
+  namespace App\Http\Controllers;
+
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Auth;
+  class LoginController extends Controller
+  {
+      /**
+       * Handle an authentication attempt.
+       *
+       * @param  \Illuminate\Http\Request $request
+       *
+       * @return Response
+       */
+      public function authenticate(Request $request)
+      {
+
+          $credentials = $request->only('email', 'password');
+
+          if (Auth::attempt($credentials)) {
+              // Authentication passed...
+              echo 'ok';
+              //return redirect()->intended('dashboard');
+          }else{
+              echo 'error';
+          }
+      }
+
+      //assume this method is loginform
+      public function index()
+      {
+          echo 'redirect to loginform (required login first)';
+          /*$data = array();
+          return view('testing.index', $data);
+          */
+      }
+  }
+  ```
+  หลังจาก Auth::attempt สำเร็จ ข้อมูลการ Login จะถูกเก็บลง Laravel Session
+  
+  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
+    ```
+    Route::prefix('member')->middleware('auth')->group(function () {
+      //user can access this route when Auth::attempt is passed
+      Route::get('/', function () {
+          echo '/member/';
+          exit;
+      });
+
+      Route::get('profile', function () {
+          echo '/member/profile';
+          exit;
+      });
+  });
+  ```
+  แต่หากยังไม่ Login เราสามารถดัก Exception ได้ที่ /app/Exceptions/Handler.php โดยเพิ่ม method unautenticated เข้าไปดังนี้
+  ```
+  protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        //when Auth::attempt not passed 
+        //for api return json 401
+        //for web redirect to route as you want
+        return $request->expectsJson()
+                    ? response()->json(['message' => $exception->getMessage()], 401)
+                    : redirect()->guest(route('loginform'));
+    }
+  ```
+  หากเรียกจาก client ที่มีการ set header json ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
 
