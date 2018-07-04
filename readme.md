@@ -190,6 +190,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    ```
 },
 - [Laravel Session](https://laravel.com/docs/5.6/session)
+- [Laravel Middleware](https://laravel.com/docs/5.6/middleware) ใช้ทำ Filter HTTP requests ตัวอย่างเช่น URL ที่เข้าได้เฉพาะ User ที่ Login หรือหลังจาก Login แล้วเราสามารถให้มี URL ที่เข้าได้เฉพาะผู้ชาย หรือ เฉพาะคนที่มีอายุ 18+ เป็นต้น
 - Laravel Authentication 
   เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ /config/auth.php
   ```
@@ -249,7 +250,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   หลังจาก Auth::attempt สำเร็จ ข้อมูลการ Login จะถูกเก็บลง Laravel Session
   
-  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
+  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น จะใช้ความรู้เรื่อง Laravel Routing + Laravel Middleware ร่วมกัน สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
     ```
     Route::prefix('member')->middleware('auth')->group(function () {
       //user can access this route when Auth::attempt is passed
