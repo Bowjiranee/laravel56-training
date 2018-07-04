@@ -40,9 +40,9 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
-- Laravel Routing
+- [Laravel Routing](https://laravel.com/docs/5.6/routing)
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
-- Laravel (Controller)
+- Laravel (Controller) (app/Http/Controllers)
   - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
   ```
   <?php
