@@ -108,6 +108,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    ```
    
 - Laravel (View) (/resources/views/) .blade file
+  เราจะใช้ [Laravel Helpers](https://laravel.com/docs/5.6/helpers) มาช่วยในการอ้างถึง path
   - asset() load resource(js,css,images,etc) in views
   ``` 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
@@ -128,7 +129,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - [Laravel (View) Blade Template](https://laravel.com/docs/5.6/blade) การทำเป็นเท็มเพลต Header,Content,Footer
   - @yield ใช้กำหนดส่วนที่จะมา replace จาก child view
   - @section ใช้กำหนดส่วนที่ใช้ replace ใน @yield
-- Laravel (Helper/Utility) Functions
+- Laravel Custom Helpers
 - Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
