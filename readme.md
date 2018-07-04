@@ -113,6 +113,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   return view('testing.index', $data);
   ``` 
 - Laravel (Helper/Utility) Functions
+- Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
 
