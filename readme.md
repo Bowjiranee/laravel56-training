@@ -130,6 +130,32 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   - @yield ใช้กำหนดส่วนที่จะมา replace จาก child view
   - @section ใช้กำหนดส่วนที่ใช้ replace ใน @yield
 - Laravel Custom Helpers
+  1. สร้างโฟลเดอ /Helpers และสร้างไฟล์ helpers.php ใน /app/Helpers/ สมมติสร้าง method ใช้งานบ่อยๆเป็น validateEmail
+  ```
+  <?php
+  function validateEmail($email) {
+      return true;
+  }
+  ?>
+  ```
+  2. แก้ไขไฟล์ composer.json เพิ่มในส่วน "files" ดังนี้
+  ```
+  "autoload": {
+    "classmap": [
+        ...
+    ],
+    "psr-4": {
+        "App\\": "app/"
+    },
+    "files": [
+        "app/helpers.php" // <---- ADD THIS
+    ]
+   ```
+   3. วิธีใช้งาน method validateEmail
+   ```
+   $bool = validateEmail('test@gmail.com');
+   ```
+},
 - Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
