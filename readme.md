@@ -134,6 +134,29 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    return $this->hasMany('App\Phone');
    ```
    
+   กลับกันใน Class Phone ต้องทำ Relation กลับมาโดยจะใช้ belongsTo และ ->withDefault() ใช้สำหรับให้ return empty App\User หาก relation ไม่พบ
+   ```
+   <?php
+
+    namespace App;
+
+    use Illuminate\Database\Eloquent\Model;
+
+    class Phone extends Model
+    {
+        protected $table = 'phone';
+
+        /**
+         * Get the user that owns the phone.
+         */
+        public function user()
+        {
+            return $this->belongsTo('App\Users')->withDefault();
+        }
+
+    }
+   ```
+   
    วิธีหาเบอร์โทรศัพท์ ของ users_id =1
    ```
    //find phone where users_id = 1
@@ -190,8 +213,12 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    ```
 },
 - [Laravel Session](https://laravel.com/docs/5.6/session)
+- [Laravel Middleware](https://laravel.com/docs/5.6/middleware) ใช้ทำ Filter HTTP requests ตัวอย่างเช่น URL ที่เข้าได้เฉพาะ User ที่ Login หรือหลังจาก Login แล้วเราสามารถให้มี URL ที่เข้าได้เฉพาะผู้ชาย หรือ เฉพาะคนที่มีอายุ 18+ เป็นต้น
 - Laravel Authentication 
-  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ /config/auth.php
+  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ 
+  ```
+  /config/auth.php
+  ```
   ```
   'providers' => [
         'users' => [
@@ -229,7 +256,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 
           if (Auth::attempt($credentials)) {
               // Authentication passed...
-              echo 'ok';
+              // Get the currently authenticated user...
+              $user = Auth::user();
               //return redirect()->intended('dashboard');
           }else{
               echo 'error';
@@ -248,7 +276,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   หลังจาก Auth::attempt สำเร็จ ข้อมูลการ Login จะถูกเก็บลง Laravel Session
   
-  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
+  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น จะใช้ความรู้เรื่อง Laravel Routing + Laravel Middleware ร่วมกัน สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
     ```
     Route::prefix('member')->middleware('auth')->group(function () {
       //user can access this route when Auth::attempt is passed
@@ -275,8 +303,13 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
                     : redirect()->guest(route('loginform'));
     }
   ```
-  หากเรียกจาก client ที่มีการ set header json ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform
+  หากเรียกจาก client ที่มีการ set header json (API) ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform เพื่อให้ Login ใหม่เป็นต้น
 - Laravel Unit Test
+  Unit test – เป็นการทดสอบในระดับ function call เพื่อเป็นการยืนยันการทำงานระดับย่อยที่สุดว่าทำงานได้ถูกต้อง เป็นการทดสอบโดยนักเขียนโปรแกรมผู้เขียนโค้ด
+
+  ประโยชน์ของ Unit test
+   - ช่วยให้โครงสร้างโค้ดดีขึ้น
+   - Developer ที่มารับงานต่อ สามารถทำความเข้าใจโค้ดได้ง่ายขึ้น โดยการรัน unit test ที่เขียนไว้ ตรวจสอบได้ว่าการแก้ไขโค้ด มีอะไรผิดพลาดหรือไม่
 - Laravel Access Control Lists (ACL)
 
 ## License
