@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email',50);
+            $table->string('password');
             $table->integer('status')->default(1);
             $table->integer('salary_class_id')->unsigned();    
             $table->timestamp('created_at')->useCurrent();

@@ -34,15 +34,49 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - ดึง laravel training project จาก github นี้
   - clone git ให้เรียบร้อย
   - แก้ไขไฟล์ .env-example.txt เป็น .env และให้แก้ไขในส่วน database connection ใช้ให้ตรงกับเครื่องเรา 
-  - composer dump-autoload
+  - composer dump-autoload (Laravel uses composer's autoloader to know where to include all the libraries and files it relies on. This referenced in bootstrap/autoload.php)
   - php artisan migrate:refresh --seed
 - เริ่มสร้าง laravel training project ใหม่ด้วยตนเอง
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
-- Laravel Routing
-- Laravel (Controller)
+- [Laravel Routing](https://laravel.com/docs/5.6/routing)
+  - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
+  
+  ```
+  //The Route::controller method is deprecated since Laravel 5.3.
+
+  Route::get('/route-basic', 'DemoController@index');
+  Route::post('/route-basic', 'DemoController@testpost');
+
+  //https://laravel.com/docs/5.6/routing#named-routes for route('model') in view
+  Route::get('/model', 'ModelTestController@index')->name('model');
+
+  Route::resource('/route-resource','RouteResourceController');
+  
+  
+  //subfolder Test controller
+  Route::get('/view', 'Test\ViewController@index');
+  Route::get('/template', 'Test\ViewController@template');
+  ```
+- Laravel (Controller) (app/Http/Controllers)
+  - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
+  ```
+  <?php
+
+  namespace App\Http\Controllers\Admin;
+
+  use Illuminate\Http\Request;
+  use App\Http\Controllers\Controller;
+
+  class PhotoController extends Controller
+  {
+      //
+  }
+  ```
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
+  - php artisan env
+  - php artisan key:generate
 - Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
   ```
   DB_CONNECTION=mysql
@@ -77,21 +111,171 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
 - Laravel Eloquent (Model)
    - php artisan make:model Users (สร้างไฟล์ Users Model) (hasOne , hasMany)
+   - ตัวอย่าง ถ้าเรากำหนดว่า User 1 คน มี Phone(เบอร์โทรศัพท์) 1 เบอร์ (one to one)
+   
    ```
-   class SalaryClass extends Model
-   {
-    protected $table = 'salary_class';
-    
-    public function user()
-    {
-        //return $this->hasOne('App\User');
-        return $this->hasMany('App\User');
-    }
-   }
+   class Users extends Model
+  {
+      /**
+       * The table associated with the model.
+       *
+       * @var string
+       */
+      protected $table = 'users';
+
+       public function phone()
+      {
+          return $this->hasOne('App\Phone');
+      }
+  }
+   ```
+   หากเป็น one to many
+   ```
+   return $this->hasMany('App\Phone');
    ```
    
-- Laravel (View)
-- Laravel (Helper/Utility) Functions
+   วิธีหาเบอร์โทรศัพท์ ของ users_id =1
+   ```
+   //find phone where users_id = 1
+   $phone = Users::find(1)->phone;
+   ```
+   
+- Laravel (View) (/resources/views/) .blade file
+  เราจะใช้ [Laravel Helpers](https://laravel.com/docs/5.6/helpers) มาช่วยในการอ้างถึง path
+  - asset() load resource(js,css,images,etc) in views
+  ``` 
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+  ```
+  - url() ไว้ทำลิ้งใน views
+  ``` 
+  <a href="{{ url('/home') }}">Home</a>
+  ```
+  - route() ไว้ทำลิ้งใน views เช่นกัน แต่ที่ Routing ต้องเซ็ท ->name() ให้เรียบร้อยถึงใช้งานได้
+  ``` 
+  <a href="{{ route('model') }}">Model</a>
+  ```
+  - ตัวอย่างโหลด View /testing/index.blade.php ใน Controllers
+  ``` 
+  $data = array();
+  return view('testing.index', $data);
+  ``` 
+- [Laravel (View) Blade Template](https://laravel.com/docs/5.6/blade) การทำเป็นเท็มเพลต Header,Content,Footer
+  - @yield ใช้กำหนดส่วนที่จะมา replace จาก child view
+  - @section ใช้กำหนดส่วนที่ใช้ replace ใน @yield
+- Laravel Custom Helpers
+  1. สร้างโฟลเดอ /Helpers และสร้างไฟล์ helpers.php ใน /app/Helpers/ สมมติสร้าง method ใช้งานบ่อยๆเป็น validateEmail
+  ```
+  <?php
+  function validateEmail($email) {
+      return true;
+  }
+  ?>
+  ```
+  2. แก้ไขไฟล์ composer.json เพิ่มในส่วน "files" ดังนี้
+  ```
+  "autoload": {
+    "classmap": [
+        ...
+    ],
+    "psr-4": {
+        "App\\": "app/"
+    },
+    "files": [
+        "app/helpers.php" // <---- ADD THIS
+    ]
+   ```
+   3. วิธีใช้งาน method validateEmail
+   ```
+   $bool = validateEmail('test@gmail.com');
+   ```
+},
+- [Laravel Session](https://laravel.com/docs/5.6/session)
+- Laravel Authentication 
+  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ /config/auth.php
+  ```
+  'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+  ```
+  ตัวอย่างการสร้าง Controller ที่ใช้ Auth::attempt
+  ```
+  <?php
+
+  namespace App\Http\Controllers;
+
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\Auth;
+  class LoginController extends Controller
+  {
+      /**
+       * Handle an authentication attempt.
+       *
+       * @param  \Illuminate\Http\Request $request
+       *
+       * @return Response
+       */
+      public function authenticate(Request $request)
+      {
+
+          $credentials = $request->only('email', 'password');
+
+          if (Auth::attempt($credentials)) {
+              // Authentication passed...
+              echo 'ok';
+              //return redirect()->intended('dashboard');
+          }else{
+              echo 'error';
+          }
+      }
+
+      //assume this method is loginform
+      public function index()
+      {
+          echo 'redirect to loginform (required login first)';
+          /*$data = array();
+          return view('testing.index', $data);
+          */
+      }
+  }
+  ```
+  หลังจาก Auth::attempt สำเร็จ ข้อมูลการ Login จะถูกเก็บลง Laravel Session
+  
+  วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
+    ```
+    Route::prefix('member')->middleware('auth')->group(function () {
+      //user can access this route when Auth::attempt is passed
+      Route::get('/', function () {
+          echo '/member/';
+          exit;
+      });
+
+      Route::get('profile', function () {
+          echo '/member/profile';
+          exit;
+      });
+  });
+  ```
+  แต่หากยังไม่ Login เราสามารถดัก Exception ได้ที่ /app/Exceptions/Handler.php โดยเพิ่ม method unautenticated เข้าไปดังนี้
+  ```
+  protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        //when Auth::attempt not passed 
+        //for api return json 401
+        //for web redirect to route as you want
+        return $request->expectsJson()
+                    ? response()->json(['message' => $exception->getMessage()], 401)
+                    : redirect()->guest(route('loginform'));
+    }
+  ```
+  หากเรียกจาก client ที่มีการ set header json ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
 

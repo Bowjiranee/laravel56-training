@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddressTable extends Migration
+class CreateTablePhone extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateAddressTable extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
+        Schema::create('phone', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('users_id')->unsigned();
-            $table->timestamps();
+            $table->string('phone');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
         
-        Schema::table('address', function(Blueprint $table) {
+        Schema::table('phone', function(Blueprint $table) {
             $table->foreign('users_id')->references('id')->on('users');
         });
     }
@@ -31,9 +33,9 @@ class CreateAddressTable extends Migration
      */
     public function down()
     {
-        Schema::table('address', function(Blueprint $table) {
-            $table->dropForeign('address_users_id_foreign');
+        Schema::table('phone', function(Blueprint $table) {
+            $table->dropForeign('phone_users_id_foreign');
         });
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('phone');
     }
 }
