@@ -27,3 +27,19 @@ Route::resource('/route-resource','RouteResourceController');
 Route::get('/view', 'Test\ViewController@index');
 Route::get('/template', 'Test\ViewController@template');
 
+Route::get('/loginform', 'LoginController@index')->name('loginform');
+Route::get('/login', 'LoginController@authenticate');
+
+
+Route::prefix('member')->middleware('auth')->group(function () {
+    //user can access this route when Auth::attempt is passed
+    Route::get('/', function () {
+        echo '/member/';
+        exit;
+    });
+
+    Route::get('profile', function () {
+        echo '/member/profile';
+        exit;
+    });
+});
