@@ -134,6 +134,29 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    return $this->hasMany('App\Phone');
    ```
    
+   กลับกันใน Class Phone ต้องทำ Relation กลับมาโดยจะใช้ belongsTo
+   ```
+   <?php
+
+    namespace App;
+
+    use Illuminate\Database\Eloquent\Model;
+
+    class Phone extends Model
+    {
+        protected $table = 'phone';
+
+        /**
+         * Get the user that owns the phone.
+         */
+        public function user()
+        {
+            return $this->belongsTo('App\Users');
+        }
+
+    }
+   ```
+   
    วิธีหาเบอร์โทรศัพท์ ของ users_id =1
    ```
    //find phone where users_id = 1
