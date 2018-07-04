@@ -20,7 +20,10 @@ class LoginController extends Controller
      
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            echo 'ok';
+            // Get the currently authenticated user...
+            $user = Auth::user();
+            echo "<pre>";
+            print_r($user);
             //return redirect()->intended('dashboard');
         }else{
             echo 'error';
