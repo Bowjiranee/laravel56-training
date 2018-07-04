@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         CommentsTableSeeder::class,
     ]);*/
          $this->call(UsersTableSeeder::class);
+         $this->call(PhoneTableSeeder::class);
          $this->call(SalaryTableSeeder::class);
     }
 }

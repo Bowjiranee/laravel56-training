@@ -16,6 +16,7 @@ class ViewController extends Controller
     
     public function template()
     {
+        $bool = validateEmail('xx');
         $data = array();
         return view('testing.child', $data);
     }

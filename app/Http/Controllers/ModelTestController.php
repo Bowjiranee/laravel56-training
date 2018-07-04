@@ -19,9 +19,9 @@ class ModelTestController extends Controller
         }*/
         
         //find all user where salary_class = 1
-        $salary = Salary::find(1)->user;
+        $phone = Users::find(1)->phone;
         
-        echo $salary;
+        echo $phone;
         exit;
         
         return "Method GET: Index ".env("APP_NAME");

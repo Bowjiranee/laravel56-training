@@ -13,4 +13,8 @@ class Users extends Model
      */
     protected $table = 'users';
     
+     public function phone()
+    {
+        return $this->hasOne('App\Phone');
+    }
 }
