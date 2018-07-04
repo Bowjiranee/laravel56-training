@@ -18,7 +18,7 @@ class ModelTestController extends Controller
             echo $user->email;
         }*/
         
-        //find all user where salary_class = 1
+        //find phone where users_id = 1
         $phone = Users::find(1)->phone;
         
         echo $phone;
