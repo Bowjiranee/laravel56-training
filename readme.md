@@ -229,7 +229,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 
           if (Auth::attempt($credentials)) {
               // Authentication passed...
-              echo 'ok';
+              // Get the currently authenticated user...
+              $user = Auth::user();
               //return redirect()->intended('dashboard');
           }else{
               echo 'error';
