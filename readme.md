@@ -28,15 +28,38 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
 ## Agenda
-- [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4
+- [ติดตั้ง Wampp Server](http://www.wampserver.com/en/) ให้ใช้ PHP version 7.2.4+
+  - phpmyadmin default user root password ไม่มี
 - [ติดตั้ง Composer](https://getcomposer.org/download/) 
-- Create laravel training project
+- ดึง laravel training project จาก github นี้
+  - clone git ให้เรียบร้อย
+  - แก้ไขไฟล์ .env-example.txt เป็น .env และให้แก้ไขในส่วน database connection ใช้ให้ตรงกับเครื่องเรา 
+  - composer dump-autoload
+  - php artisan migrate:refresh --seed
+- เริ่มสร้าง laravel training project ใหม่ด้วยตนเอง
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
 - Laravel Routing
+  - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
 - Laravel (Controller)
+  - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) โดยจะได้ Code ตั้งต้นลักษณะนี้
+  ```
+  <?php
+
+  namespace App\Http\Controllers\Admin;
+
+  use Illuminate\Http\Request;
+  use App\Http\Controllers\Controller;
+
+  class PhotoController extends Controller
+  {
+      //
+  }
+  ```
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
+  - php artisan env
+  - php artisan key:generate
 - Laravel Database (MySQL MariaDB) database connection จะใช้ config ใน .env ไฟล์
   ```
   DB_CONNECTION=mysql
@@ -84,8 +107,26 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    }
    ```
    
-- Laravel (View)
+- Laravel (View) (/resources/views/) .blade file
+  - asset() load resource(js,css,images,etc) in views
+  ``` 
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+  ```
+  - url() ไว้ทำลิ้งใน views
+  ``` 
+  <a href="{{ url('/home') }}">Home</a>
+  ```
+  - route() ไว้ทำลิ้งใน views เช่นกัน แต่ที่ Routing ต้องเซ็ท ->name() ให้เรียบร้อยถึงใช้งานได้
+  ``` 
+  <a href="{{ route('model') }}">Model</a>
+  ```
+  - ตัวอย่างโหลด View /testing/index.blade.php ใน Controllers
+  ``` 
+  $data = array();
+  return view('testing.index', $data);
+  ``` 
 - Laravel (Helper/Utility) Functions
+- Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
 
