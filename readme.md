@@ -34,7 +34,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - ดึง laravel training project จาก github นี้
   - clone git ให้เรียบร้อย
   - แก้ไขไฟล์ .env-example.txt เป็น .env และให้แก้ไขในส่วน database connection ใช้ให้ตรงกับเครื่องเรา 
-  - composer dump-autoload
+  - composer dump-autoload (Laravel uses composer's autoloader to know where to include all the libraries and files it relies on. This referenced in bootstrap/autoload.php)
   - php artisan migrate:refresh --seed
 - เริ่มสร้าง laravel training project ใหม่ด้วยตนเอง
   ```
@@ -94,20 +94,31 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    - php artisan db:seed --class=UsersTableSeeder (หากต้องการรันไฟล์ seeder เพียงแค่บางไฟล์)
 - Laravel Eloquent (Model)
    - php artisan make:model Users (สร้างไฟล์ Users Model) (hasOne , hasMany)
+   - ตัวอย่าง ถ้าเรากำหนดว่า User 1 คน มี Phone(เบอร์โทรศัพท์) 1 เบอร์ (one to one)
+   
    ```
-   class SalaryClass extends Model
-   {
-    protected $table = 'salary_class';
-    
-    public function user()
-    {
-        //return $this->hasOne('App\User');
-        return $this->hasMany('App\User');
-    }
-   }
+   class Users extends Model
+  {
+      /**
+       * The table associated with the model.
+       *
+       * @var string
+       */
+      protected $table = 'users';
+
+       public function phone()
+      {
+          return $this->hasOne('App\Phone');
+      }
+  }
+   ```
+   หากเป็น one to many
+   ```
+   return $this->hasMany('App\Phone');
    ```
    
 - Laravel (View) (/resources/views/) .blade file
+  เราจะใช้ [Laravel Helpers](https://laravel.com/docs/5.6/helpers) มาช่วยในการอ้างถึง path
   - asset() load resource(js,css,images,etc) in views
   ``` 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
@@ -128,7 +139,33 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - [Laravel (View) Blade Template](https://laravel.com/docs/5.6/blade) การทำเป็นเท็มเพลต Header,Content,Footer
   - @yield ใช้กำหนดส่วนที่จะมา replace จาก child view
   - @section ใช้กำหนดส่วนที่ใช้ replace ใน @yield
-- Laravel (Helper/Utility) Functions
+- Laravel Custom Helpers
+  1. สร้างโฟลเดอ /Helpers และสร้างไฟล์ helpers.php ใน /app/Helpers/ สมมติสร้าง method ใช้งานบ่อยๆเป็น validateEmail
+  ```
+  <?php
+  function validateEmail($email) {
+      return true;
+  }
+  ?>
+  ```
+  2. แก้ไขไฟล์ composer.json เพิ่มในส่วน "files" ดังนี้
+  ```
+  "autoload": {
+    "classmap": [
+        ...
+    ],
+    "psr-4": {
+        "App\\": "app/"
+    },
+    "files": [
+        "app/helpers.php" // <---- ADD THIS
+    ]
+   ```
+   3. วิธีใช้งาน method validateEmail
+   ```
+   $bool = validateEmail('test@gmail.com');
+   ```
+},
 - Laravel Authentication
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
