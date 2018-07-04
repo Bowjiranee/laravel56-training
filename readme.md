@@ -125,7 +125,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   $data = array();
   return view('testing.index', $data);
   ``` 
-- Laravel (View) Blade Template
+- Laravel (View) Blade Template การทำเป็นเท็มเพลต Header,Content,Footer
 - Laravel (Helper/Utility) Functions
 - Laravel Authentication
 - Laravel Unit Test
