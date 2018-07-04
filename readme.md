@@ -47,11 +47,13 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   //The Route::controller method is deprecated since Laravel 5.3.
 
   Route::get('/route-basic', 'DemoController@index');
+  Route::post('/route-basic', 'DemoController@testpost');
 
   //https://laravel.com/docs/5.6/routing#named-routes for route('model') in view
   Route::get('/model', 'ModelTestController@index')->name('model');
 
   Route::resource('/route-resource','RouteResourceController');
+  
   
   //subfolder Test controller
   Route::get('/view', 'Test\ViewController@index');
