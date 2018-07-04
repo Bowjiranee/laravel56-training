@@ -192,7 +192,10 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 - [Laravel Session](https://laravel.com/docs/5.6/session)
 - [Laravel Middleware](https://laravel.com/docs/5.6/middleware) ใช้ทำ Filter HTTP requests ตัวอย่างเช่น URL ที่เข้าได้เฉพาะ User ที่ Login หรือหลังจาก Login แล้วเราสามารถให้มี URL ที่เข้าได้เฉพาะผู้ชาย หรือ เฉพาะคนที่มีอายุ 18+ เป็นต้น
 - Laravel Authentication 
-  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ /config/auth.php
+  เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ 
+  ```
+  /config/auth.php
+  ```
   ```
   'providers' => [
         'users' => [
