@@ -41,6 +41,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   composer create-project --prefer-dist laravel/laravel training
   ```
 - Laravel Routing
+  - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
 - Laravel (Controller)
   - php artisan make:controller Admin/PhotoController (สร้าง PhotoController อยู่ใน subfolder Admin) 
 - Laravel .env file (root path) ใช้เก็บ config ต่างๆที่เปลี่ยนไปตาม environment
@@ -93,7 +94,19 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
    }
    ```
    
-- Laravel (View)
+- Laravel (View) (/resources/views/) .blade file
+  - asset() load resource(js,css,images,etc) in views
+  ``` 
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+  ```
+  - url() ไว้ทำลิ้งใน views
+  ``` 
+  <a href="{{ url('/home') }}">Home</a>
+  ```
+  - route() ไว้ทำลิ้งใน views เช่นกัน แต่ที่ Routing ต้องเซ็ท ->name() ให้เรียบร้อยถึงใช้งานได้
+  ``` 
+  <a href="{{ route('model') }}">Model</a>
+  ```
 - Laravel (Helper/Utility) Functions
 - Laravel Unit Test
 - Laravel Access Control Lists (ACL)
