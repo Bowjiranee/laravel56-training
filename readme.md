@@ -306,12 +306,22 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
     }
   ```
   หากเรียกจาก client ที่มีการ set header json (API) ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform เพื่อให้ Login ใหม่เป็นต้น
-- Laravel Unit Test
+- Laravel Unit Test (/tests)
   Unit test – เป็นการทดสอบในระดับ function call เพื่อเป็นการยืนยันการทำงานระดับย่อยที่สุดว่าทำงานได้ถูกต้อง เป็นการทดสอบโดยนักเขียนโปรแกรมผู้เขียนโค้ด
 
   ประโยชน์ของ Unit test
-   - ช่วยให้โครงสร้างโค้ดดีขึ้น
+   - ช่วยป้องกันเรื่องการ Deployment ที่มีบางสิ่งผิดพลาด
    - Developer ที่มารับงานต่อ สามารถทำความเข้าใจโค้ดได้ง่ายขึ้น โดยการรัน unit test ที่เขียนไว้ ตรวจสอบได้ว่าการแก้ไขโค้ด มีอะไรผิดพลาดหรือไม่
+  
+  โดย Laravel จะมีไฟล์ phpunit.xml เป็นชุด config ของการเทส 
+  
+  คำสั่งเทส (หากไม่ map environment variable ใน window)
+  ```
+  vendor\bin\phpunit
+  ```
+  
+  Code Coverage – PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
+  
 - Laravel Access Control Lists (ACL)
 
 ## License
