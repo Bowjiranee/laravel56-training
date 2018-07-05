@@ -10,7 +10,10 @@ class ViewController extends Controller
     //
     public function index()
     {
-        $data = array();
+        $data = array(
+         'key1' => 'value1',
+         'key2' => array ('key2.1' => 'value2.1', 'key2.2' => 'value2.2')
+        );
         return view('testing.index', $data);
     }
     

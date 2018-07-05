@@ -13,6 +13,13 @@ class Users extends Model
      */
     protected $table = 'users';
     
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['password'];
+    
      public function phone()
     {
         return $this->hasOne('App\Phone');

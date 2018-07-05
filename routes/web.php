@@ -28,7 +28,7 @@ Route::get('/view', 'Test\ViewController@index');
 Route::get('/template', 'Test\ViewController@template');
 
 Route::get('/loginform', 'LoginController@index')->name('loginform');
-Route::get('/login', 'LoginController@authenticate');
+Route::post('/login', 'LoginController@authenticate');
 
 
 Route::prefix('member')->middleware('auth')->group(function () {

@@ -22,18 +22,17 @@ class LoginController extends Controller
             // Authentication passed...
             // Get the currently authenticated user...
             $user = Auth::user();
-            echo "<pre>";
-            print_r($user);
-            //return redirect()->intended('dashboard');
+  
+            return redirect()->intended('member');
         }else{
-            echo 'error';
+            return redirect()->intended('loginform');
         }
     }
     
     //assume this method is loginform
     public function index()
     {
-        echo 'redirect to loginform (required login first)';
+        return 'redirect to loginform (required login first)';
         /*$data = array();
         return view('testing.index', $data);
         */
