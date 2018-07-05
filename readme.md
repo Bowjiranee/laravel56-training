@@ -40,6 +40,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
+- [Artisan Command](https://laravel.com/docs/5.6/artisan) (ชุดคำสั่งบน command line ที่ Laravel ทำมาเพื่อช่วยเราในการทำโปรเจ็คด้วย Laravel)
+  - php artisan list (เรียกดูชุดคำสั่งทั้งหมด)
 - [Laravel Routing](https://laravel.com/docs/5.6/routing)
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
   
