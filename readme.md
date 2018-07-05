@@ -326,7 +326,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   composer require phpunit/php-code-coverage --dev
   ```
-  ตรวจสอบ xdebug extension ใน php.ini หากยังไม่มีให้ใส่ตามนี้
+  phpunit code coverage จะใช้ xedug ในการสร้าง report ดังนั้นให้เราตรวจสอบ xdebug extension ใน php.ini หากยังไม่มีให้ใส่ตามนี้
   ```
   [xdebug]
   zend_extension="c:/wamp_new/bin/php/php7.1.16/zend_ext/php_xdebug-2.6.0-7.1-vc14.dll"
