@@ -315,7 +315,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   
   โดย Laravel จะมีไฟล์ phpunit.xml เป็นชุด config ของการเทส 
   
-  คำสั่งเทส (หากไม่ map environment variable ใน window)
+  คำสั่งรันเทส (หากไม่ map environment variable ใน window)
   ```
   vendor\bin\phpunit
   ```
@@ -344,6 +344,12 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 		<log type="coverage-html" target="./report" lowUpperBound="50" highLowerBound="80" />
 	</logging>
   ```
+  
+  รันเทสอีกครั้ง
+  ``` 
+  vendor\bin\phpunit
+  ```
+  
   โดยตัวอย่างนี้จะสร้าง report ที่ folder /report/index.html เมื่อเปิดแล้วจะแสดงดังภาพ
   
   ![alt text](http://kongarn.com/images/laravel56-phpunit-code-coverage.jpg)
