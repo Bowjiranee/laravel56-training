@@ -344,7 +344,10 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 		<log type="coverage-html" target="./report" lowUpperBound="50" highLowerBound="80" />
 	</logging>
   ```
-  โดยตัวอย่างนี้จะสร้าง report ที่ folder /report
+  โดยตัวอย่างนี้จะสร้าง report ที่ folder /report/index.html เมื่อเปิดแล้วจะแสดงดังภาพ
+  
+  ![alt text](http://kongarn.com/images/laravel56-phpunit-code-coverage.jpg)
+  
   
   
   
