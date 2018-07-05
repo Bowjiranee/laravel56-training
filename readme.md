@@ -322,6 +322,32 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   
   Code Coverage – PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
   
+  ติดตั้ง phpunit code coverage
+  ```
+  composer require phpunit/php-code-coverage --dev
+  ```
+  ตรวจสอบ xdebug extension ใน php.ini หากยังไม่มีให้ใส่ตามนี้
+  ```
+  [xdebug]
+  zend_extension="c:/wamp_new/bin/php/php7.1.16/zend_ext/php_xdebug-2.6.0-7.1-vc14.dll"
+  xdebug.remote_enable = off
+  xdebug.profiler_enable = off
+  xdebug.profiler_enable_trigger = Off
+  xdebug.profiler_output_name = cachegrind.out.%t.%p
+  xdebug.profiler_output_dir ="c:/wamp_new/tmp"
+  xdebug.show_local_vars=0
+  ```
+  
+  ที่ไฟล์ phpunit.xml ใส่คำสั่งเพื่อให้สร้าง report phpunit code coverage
+  ```
+  <logging>
+		<log type="coverage-html" target="./report" lowUpperBound="50" highLowerBound="80" />
+	</logging>
+  ```
+  โดยตัวอย่างนี้จะสร้าง report ที่ folder /report
+  
+  
+  
 - Laravel Access Control Lists (ACL)
 
 ## License
