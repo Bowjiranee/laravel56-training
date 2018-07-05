@@ -40,6 +40,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   composer create-project --prefer-dist laravel/laravel training
   ```
+- [Artisan Command](https://laravel.com/docs/5.6/artisan) (ชุดคำสั่งบน command line ที่ Laravel ทำมาเพื่อช่วยเราในการทำโปรเจ็คด้วย Laravel)
+  - php artisan list (เรียกดูชุดคำสั่งทั้งหมด)
 - [Laravel Routing](https://laravel.com/docs/5.6/routing)
   - php artisan route:list (เรียกดูรายการ Routing ทั้งหมด)
   
@@ -304,12 +306,57 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
     }
   ```
   หากเรียกจาก client ที่มีการ set header json (API) ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform เพื่อให้ Login ใหม่เป็นต้น
-- Laravel Unit Test
+- Laravel Unit Test (/tests)
   Unit test – เป็นการทดสอบในระดับ function call เพื่อเป็นการยืนยันการทำงานระดับย่อยที่สุดว่าทำงานได้ถูกต้อง เป็นการทดสอบโดยนักเขียนโปรแกรมผู้เขียนโค้ด
 
   ประโยชน์ของ Unit test
-   - ช่วยให้โครงสร้างโค้ดดีขึ้น
+   - ช่วยป้องกันเรื่องการ Deployment ที่มีบางสิ่งผิดพลาด
    - Developer ที่มารับงานต่อ สามารถทำความเข้าใจโค้ดได้ง่ายขึ้น โดยการรัน unit test ที่เขียนไว้ ตรวจสอบได้ว่าการแก้ไขโค้ด มีอะไรผิดพลาดหรือไม่
+  
+  โดย Laravel จะมีไฟล์ phpunit.xml เป็นชุด config ของการเทส 
+  
+  คำสั่งรันเทส (หากไม่ map environment variable ใน window)
+  ```
+  vendor\bin\phpunit
+  ```
+  
+  Code Coverage – PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
+  
+  ติดตั้ง phpunit code coverage
+  ```
+  composer require phpunit/php-code-coverage --dev
+  ```
+  phpunit code coverage จะใช้ xedug ในการสร้าง report ดังนั้นให้เราตรวจสอบ xdebug extension ใน php.ini หากยังไม่มีให้ใส่ตามนี้
+  ```
+  [xdebug]
+  zend_extension="c:/wamp_new/bin/php/php7.1.16/zend_ext/php_xdebug-2.6.0-7.1-vc14.dll"
+  xdebug.remote_enable = off
+  xdebug.profiler_enable = off
+  xdebug.profiler_enable_trigger = Off
+  xdebug.profiler_output_name = cachegrind.out.%t.%p
+  xdebug.profiler_output_dir ="c:/wamp_new/tmp"
+  xdebug.show_local_vars=0
+  ```
+  
+  ที่ไฟล์ phpunit.xml ใส่คำสั่งเพื่อให้สร้าง report phpunit code coverage
+  ```
+  <logging>
+		<log type="coverage-html" target="./report" lowUpperBound="50" highLowerBound="80" />
+	</logging>
+  ```
+  
+  รันเทสอีกครั้ง
+  ``` 
+  vendor\bin\phpunit
+  ```
+  
+  โดยตัวอย่างนี้จะสร้าง report ที่ folder /report/index.html เมื่อเปิดแล้วจะแสดงดังภาพ
+  
+  ![alt text](http://kongarn.com/images/laravel56-phpunit-code-coverage.jpg)
+  
+  
+  
+  
 - Laravel Access Control Lists (ACL)
 
 ## License
