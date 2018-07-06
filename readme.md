@@ -470,13 +470,14 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 	    }
 
 	}
-    ```
+```
   
+
 ### Excel Example
 ติดตั้ง Maatwebsite\Excel 
    ```
 	composer require mattwebsite/excel
-    ```
+   ```
 สร้าง excel template ใน /resources/views/excel/template.blade.php
 ```
 	<table>
