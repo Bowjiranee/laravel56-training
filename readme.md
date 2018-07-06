@@ -556,6 +556,25 @@ class BladeExport implements FromView
 	}
     }
 ```
+### QRCode Example
+ติดตั้ง werneckbh\laravel-qr-code 
+```
+   composer require werneckbh\laravel-qr-code
+```
+วิธีใช้งาน
+```
+    namespace App\Http\Controllers;
+
+    use Illuminate\Http\Request;
+    use LaravelQRCode\Facades\QRCode;
+    class DemoController extends Controller
+    { 
+	   public function testqr()
+	    {
+		return response(QRCode::text('QR Code Generator for Laravel!')->png())->header('Content-Type', 'image/png');  
+	    }
+    }
+```
 
 
 - Laravel Access Control Lists (ACL)
