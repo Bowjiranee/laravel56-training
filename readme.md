@@ -472,7 +472,91 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 	}
     ```
   
-  
+### Excel Example
+ติดตั้ง Maatwebsite\Excel 
+   ```
+	composer require mattwebsite/excel
+    ```
+สร้าง excel template ใน /resources/views/excel/template.blade.php
+```
+	<table>
+	    <thead>
+	    <tr>
+		@foreach($data[0] as $key => $value)
+		    <th>{{ ucfirst($key) }}</th>
+		@endforeach
+	    </tr>
+	    </thead>
+	    <tbody>
+	    @foreach($data as $row)
+		<tr>
+		@foreach ($row as $value)
+		    <td>{{ $value }}</td>
+		@endforeach
+		</tr>
+	    @endforeach
+	    </tbody>
+	</table>
+```
+
+สร้างไฟล์ BladeExport สำหรับโหลด excel template (/app/Exports/BladeExport.php)
+```
+<?php
+namespace App\Exports;
+
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+
+class BladeExport implements FromView
+{
+
+    private $data;
+ 
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+ 
+    public function view(): View
+    {
+        return view('/excel/template', [
+            'data' => $this->data
+        ]);
+    }
+}
+?>
+```
+วิธีใช้งาน export excel download ใน Controllers
+``` 
+    namespace App\Http\Controllers;
+
+    use Illuminate\Http\Request;
+    use Maatwebsite\Excel\Facades\Excel;
+    use App\Exports\BladeExport;
+    class DemoController extends Controller
+    {   
+	public function testexcel(){
+
+	$data = [
+	    [
+		'name' => 'Povilas',
+		'surname' => 'Korop',
+		'email' => 'povilas@laraveldaily.com',
+		'twitter' => '@povilaskorop'
+	    ],
+	    [
+		'name' => 'Taylor',
+		'surname' => 'Otwell',
+		'email' => 'taylor@laravel.com',
+		'twitter' => '@taylorotwell'
+	    ]
+	];
+	return Excel::download(new BladeExport($data), 'invoices.xlsx');
+	}
+    }
+```
+
+
 - Laravel Access Control Lists (ACL)
 
 ## License
