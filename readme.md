@@ -216,7 +216,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 },
 - [Laravel Session](https://laravel.com/docs/5.6/session)
 - [Laravel Middleware](https://laravel.com/docs/5.6/middleware) ใช้ทำ Filter HTTP requests ตัวอย่างเช่น URL ที่เข้าได้เฉพาะ User ที่ Login หรือหลังจาก Login แล้วเราสามารถให้มี URL ที่เข้าได้เฉพาะผู้ชาย หรือ เฉพาะคนที่มีอายุ 18+ เป็นต้น
-- Laravel Authentication 
+### Laravel Authentication 
   เราสามารถใช้ Auth Facades ในการจัดการเรื่อง Authentication โดยใช้ Auth::attempt($array) ตรวจสอบการ login โดย default จะนำค่า $array ไปตรวจสอบ ในตัวอย่างจะนำค่า email ไปหาใน $table ซึ่งสามารถ config $table ได้ที่ไฟล์ 
   ```
   /config/auth.php
@@ -279,7 +279,7 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   หลังจาก Auth::attempt สำเร็จ ข้อมูลการ Login จะถูกเก็บลง Laravel Session
   
   วิธีทำ Route group ที่ต้องผ่านการ Login ก่อนเท่านั้น จะใช้ความรู้เรื่อง Laravel Routing + Laravel Middleware ร่วมกัน สมมติว่าเป็นภายใต้ /member ให้ทำการใส่ middleware('auth') โดยหาก Login แล้วเวลาเราเข้า /member/ หรือ /member/profile จะ echo ค่าดังกล่าว
-    ```
+ ```
     Route::prefix('member')->middleware('auth')->group(function () {
       //user can access this route when Auth::attempt is passed
       Route::get('/', function () {
@@ -295,18 +295,18 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   แต่หากยังไม่ Login เราสามารถดัก Exception ได้ที่ /app/Exceptions/Handler.php โดยเพิ่ม method unautenticated เข้าไปดังนี้
   ```
-  protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        //when Auth::attempt not passed 
-        //for api return json 401
-        //for web redirect to route as you want
-        return $request->expectsJson()
-                    ? response()->json(['message' => $exception->getMessage()], 401)
-                    : redirect()->guest(route('loginform'));
-    }
+	  protected function unauthenticated($request, AuthenticationException $exception)
+	    {
+		//when Auth::attempt not passed 
+		//for api return json 401
+		//for web redirect to route as you want
+		return $request->expectsJson()
+			    ? response()->json(['message' => $exception->getMessage()], 401)
+			    : redirect()->guest(route('loginform'));
+	    }
   ```
   หากเรียกจาก client ที่มีการ set header json (API) ระบบจะรีเทิน json 401 แต่นอกจากนี้ระบบจะพาไปหน้า loginform เพื่อให้ Login ใหม่เป็นต้น
-- Laravel Unit Test (/tests)
+  ### Laravel Unit Test (/tests)
   Unit test – เป็นการทดสอบในระดับ function call เพื่อเป็นการยืนยันการทำงานระดับย่อยที่สุดว่าทำงานได้ถูกต้อง เป็นการทดสอบโดยนักเขียนโปรแกรมผู้เขียนโค้ด
 
   ประโยชน์ของ Unit test
@@ -320,7 +320,8 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   vendor\bin\phpunit
   ```
   
-  Code Coverage – PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
+  ### Code Coverage
+  PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
   
   ติดตั้ง phpunit code coverage
   ```
