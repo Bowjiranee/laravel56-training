@@ -342,7 +342,6 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
         $response = $this->post('/login',$credential);
 
         $response->assertRedirect('/member');
-        //$this->assertAuthenticated($guard = null); 
     }
    ```
   
