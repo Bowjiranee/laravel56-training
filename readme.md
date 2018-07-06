@@ -319,6 +319,32 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   vendor\bin\phpunit
   ```
+  ### Mockery 
+  Mockery ใช้สำหรับจำลอง(mock) object ใน unit testing ยกตัวอย่างเช่น การ mock object ในการต่อ database , object ของคลาสต่างๆ
+  
+  ติดตั้ง mockery
+  ```
+  composer require mockery/mockery --dev
+  ```
+  ตัวอย่างการใช้ mockery mock Facade object เช่น Auth Facade โดยจะ mock method Auth::attempt($array) ให้ return true
+  ```
+  //login success with mock db
+    public function testLoginSuccess()
+    {
+        $credential = [
+            'email' => 'kongarn@gmail.com',
+            'password' => '11111111'
+        ];
+        
+        Auth::shouldReceive('attempt')->once()->withAnyArgs()->andReturn(true);
+        Auth::shouldReceive('user')->once()->withAnyArgs()->andReturn(true);
+
+        $response = $this->post('/login',$credential);
+
+        $response->assertRedirect('/member');
+    }
+   ```
+  
   
   ### Code Coverage
   PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
@@ -444,9 +470,94 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
 	    }
 
 	}
-    ```
+```
   
-  
+
+### Excel Example
+ติดตั้ง Maatwebsite\Excel 
+   ```
+	composer require mattwebsite/excel
+   ```
+สร้าง excel template ใน /resources/views/excel/template.blade.php
+```
+	<table>
+	    <thead>
+	    <tr>
+		@foreach($data[0] as $key => $value)
+		    <th>{{ ucfirst($key) }}</th>
+		@endforeach
+	    </tr>
+	    </thead>
+	    <tbody>
+	    @foreach($data as $row)
+		<tr>
+		@foreach ($row as $value)
+		    <td>{{ $value }}</td>
+		@endforeach
+		</tr>
+	    @endforeach
+	    </tbody>
+	</table>
+```
+
+สร้างไฟล์ BladeExport สำหรับโหลด excel template (/app/Exports/BladeExport.php)
+```
+<?php
+namespace App\Exports;
+
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+
+class BladeExport implements FromView
+{
+
+    private $data;
+ 
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+ 
+    public function view(): View
+    {
+        return view('/excel/template', [
+            'data' => $this->data
+        ]);
+    }
+}
+?>
+```
+วิธีใช้งาน export excel download ใน Controllers
+``` 
+    namespace App\Http\Controllers;
+
+    use Illuminate\Http\Request;
+    use Maatwebsite\Excel\Facades\Excel;
+    use App\Exports\BladeExport;
+    class DemoController extends Controller
+    {   
+	public function testexcel(){
+
+	$data = [
+	    [
+		'name' => 'Povilas',
+		'surname' => 'Korop',
+		'email' => 'povilas@laraveldaily.com',
+		'twitter' => '@povilaskorop'
+	    ],
+	    [
+		'name' => 'Taylor',
+		'surname' => 'Otwell',
+		'email' => 'taylor@laravel.com',
+		'twitter' => '@taylorotwell'
+	    ]
+	];
+	return Excel::download(new BladeExport($data), 'invoices.xlsx');
+	}
+    }
+```
+
+
 - Laravel Access Control Lists (ACL)
 
 ## License
