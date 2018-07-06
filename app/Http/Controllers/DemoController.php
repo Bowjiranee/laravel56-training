@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BladeExport;
-
+use LaravelQRCode\Facades\QRCode;
 
 class DemoController extends Controller
 {
@@ -46,6 +46,11 @@ class DemoController extends Controller
             ]
         ];
         return Excel::download(new BladeExport($data), 'invoices.xlsx');
+    }
+    
+    public function testqr()
+    {
+        return response(QRCode::text('QR Code Generator for Laravel!')->png())->header('Content-Type', 'image/png');  
     }
 
 }

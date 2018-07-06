@@ -31,6 +31,7 @@ Route::get('/loginform', 'LoginController@index')->name('loginform');
 Route::post('/login', 'LoginController@authenticate');
 
 Route::get('/testexcel', 'DemoController@testexcel');
+Route::get('/testqr', 'DemoController@testqr');
 
 //https://mattstauffer.com/blog/multiple-authentication-guard-drivers-including-api-in-laravel-5-2/
 
