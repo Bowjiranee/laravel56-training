@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 
 class ExampleTest extends TestCase
 {
@@ -22,17 +23,37 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
     }
     
+    //login success with mock db
     public function testLoginSuccess()
     {
         $credential = [
             'email' => 'kongarn@gmail.com',
             'password' => '11111111'
         ];
+        
+        Auth::shouldReceive('attempt')->once()->withAnyArgs()->andReturn(true);
+        Auth::shouldReceive('user')->once()->withAnyArgs()->andReturn(true);
 
         $response = $this->post('/login',$credential);
 
         $response->assertRedirect('/member');
-        $this->assertAuthenticated($guard = null);
+        //$this->assertAuthenticated($guard = null); 
+    }
+    
+    public function testLoginSuccessNoMock()
+    {
+        $credential = [
+            'email' => 'kongarn@gmail.com',
+            'password' => '11111111'
+        ];
+        
+        //Auth::shouldReceive('attempt')->once()->withAnyArgs()->andReturn(true);
+        //Auth::shouldReceive('user')->once()->withAnyArgs()->andReturn(true);
+
+        $response = $this->post('/login',$credential);
+
+        $response->assertRedirect('/member');
+        $this->assertAuthenticated();//test Laravel Authentication
     }
     
     public function testLoginFail()

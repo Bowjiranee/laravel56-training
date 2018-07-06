@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('email',50);
             $table->string('password');
             $table->integer('status')->default(1);
-            $table->integer('salary_class_id')->unsigned();    
+            $table->integer('salary_class_id')->unsigned();
+            $table->string('api_token', 60)->unique();    
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
