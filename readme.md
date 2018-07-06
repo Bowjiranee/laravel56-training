@@ -319,6 +319,33 @@ If you're not in the mood to read, [Laracasts](https://laracasts.com) contains o
   ```
   vendor\bin\phpunit
   ```
+  ### Mockery 
+  Mockery ใช้สำหรับจำลอง(mock) object ใน unit testing ยกตัวอย่างเช่น การ mock object ในการต่อ database , object ของคลาสต่างๆ
+  
+  ติดตั้ง mockery
+  ```
+  composer require mockery/mockery --dev
+  ```
+  ตัวอย่างการใช้ mockery mock Facade object เช่น Auth Facade โดยจะ mock method Auth::attempt($array) ให้ return true
+  ```
+  //login success with mock db
+    public function testLoginSuccess()
+    {
+        $credential = [
+            'email' => 'kongarn@gmail.com',
+            'password' => '11111111'
+        ];
+        
+        Auth::shouldReceive('attempt')->once()->withAnyArgs()->andReturn(true);
+        Auth::shouldReceive('user')->once()->withAnyArgs()->andReturn(true);
+
+        $response = $this->post('/login',$credential);
+
+        $response->assertRedirect('/member');
+        //$this->assertAuthenticated($guard = null); 
+    }
+   ```
+  
   
   ### Code Coverage
   PHPUnit ในบางครั้งเราอาจเขียน unit test ซ้ำๆที่เดิม ไม่มีประโยชน์ ตัวนี้จะมาช่วยตรวจสอบ Line , Method ต่างๆว่าเราเทสผ่านบรรทัดไหนบ้าง คิดเป็นกี่ % ซึ่งเราควรเขียน unit test ให้วิ่งผ่านทุกๆจุดของโปรแกรมของเรานั่นเอง
