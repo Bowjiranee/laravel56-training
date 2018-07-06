@@ -30,10 +30,12 @@ Route::get('/template', 'Test\ViewController@template');
 Route::get('/loginform', 'LoginController@index')->name('loginform');
 Route::post('/login', 'LoginController@authenticate');
 
+Route::get('/testexcel', 'DemoController@testexcel');
+
 //https://mattstauffer.com/blog/multiple-authentication-guard-drivers-including-api-in-laravel-5-2/
 
 //middleware('auth') => session
-//middleware('auth:api') => token
+//middleware('auth:api') => api_token
 Route::prefix('member')->middleware('auth')->group(function () {
     //user can access this route when Auth::attempt is passed
     Route::get('/', function () {
